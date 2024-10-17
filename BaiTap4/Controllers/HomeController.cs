@@ -1,4 +1,5 @@
 using BaiTap4.Models;
+using BaiTap4.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
@@ -35,7 +36,27 @@ namespace BaiTap4.Controllers
 			return View(lst);
 		}
 
-        public IActionResult Privacy()
+        public IActionResult ChiTietSanPham(String maSp)
+		{
+			var sanpham = db.TDanhMucSps.SingleOrDefault(x => x.MaSp == maSp);
+            var anhSanPham = db.TAnhSps.Where(x => x.MaSp == maSp).ToList();
+			ViewBag.anhSanPham = anhSanPham;
+			return View(sanpham);
+		}
+
+        public IActionResult ProductDetail(String maSp)
+        {
+			var sanpham = db.TDanhMucSps.SingleOrDefault(x => x.MaSp == maSp);
+			var anhSanPham = db.TAnhSps.Where(x => x.MaSp == maSp).ToList();
+            var homeProductDetailViewModel = new HomeProductDetailViewModel
+			{
+				danhMucSp = sanpham,
+				anhSps = anhSanPham
+			};
+			return View(homeProductDetailViewModel);
+        }
+
+		public IActionResult Privacy()
         {
             return View();
         }
