@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using X.PagedList;
+using BaiTap4.Models.Authentication;
 
 namespace BaiTap4.Areas.Admin.Controllers
 {
@@ -14,11 +15,13 @@ namespace BaiTap4.Areas.Admin.Controllers
         QlbanVaLiContext db = new QlbanVaLiContext();
         [Route("")]
         [Route("index")]
+        [Authentication]
         public IActionResult Index()
         {
             return View();
         }
         [Route("danhmucsanpham")]
+        [Authentication]
         public IActionResult DanhMucSanPham(int? page)
         {
             int pageSize = 12;
@@ -53,6 +56,7 @@ namespace BaiTap4.Areas.Admin.Controllers
         }
 
         [Route("SuaSanPham")]
+        [Authentication]
         [HttpGet]
         public IActionResult SuaSanPham(String maSanPham)
         {

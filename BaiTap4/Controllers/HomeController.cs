@@ -1,4 +1,5 @@
 using BaiTap4.Models;
+using BaiTap4.Models.Authentication;
 using BaiTap4.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -17,6 +18,7 @@ namespace BaiTap4.Controllers
             _logger = logger;
         }
 
+        //[Authentication]
         public IActionResult Index(int? page)
         {
             int pageSize = 8;
@@ -25,6 +27,7 @@ namespace BaiTap4.Controllers
             PagedList<TDanhMucSp> lst = new PagedList<TDanhMucSp>(lstsanpham, pageNumber, pageSize);
 			return View(lst);
         }
+        //[Authentication]
 
         public IActionResult SanPhamTheoLoai(String maLoai, int? page)
         {
@@ -35,7 +38,7 @@ namespace BaiTap4.Controllers
             ViewBag.maLoai = maLoai;
 			return View(lst);
 		}
-
+        //[Authentication]
         public IActionResult ChiTietSanPham(String maSp)
 		{
 			var sanpham = db.TDanhMucSps.SingleOrDefault(x => x.MaSp == maSp);
